@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechCorp AI Chat</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script type="module" src="src/app.js" defer></script>
+</head>
+
+<body>
+    <div class="app-shell">
+        <header class="app-header">
+            <div>
+                <h1>TechCorp AI Chat</h1>
+                <p>Discussion avec Phi-3.5-Financial via Ollama</p>
+            </div>
+        </header>
+
+        <main class="chat-shell">
+            <section id="chatWindow" class="chat-window" aria-live="polite"></section>
+
+            <div id="chatStatus" class="chat-status" aria-live="assertive" hidden></div>
+
+            <form id="chatForm" class="chat-form">
+                <textarea
+                    id="chatInput"
+                    placeholder="Écrire votre message..."
+                    rows="2"
+                    maxlength="500"
+                    required></textarea>
+
+                <button type="submit">Envoyer</button>
+            </form>
+        </main>
+    </div>
+</body>
+
+</html>

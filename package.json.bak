@@ -1,0 +1,8 @@
+{
+  "name": "techcorp-ai-chat",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8080"
+  }
+}
