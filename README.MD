@@ -301,3 +301,6 @@ L'application permet :
 # Auteur
 
 Projet réalisé individuellement dans le cadre du Hackathon IA TechCorp.
+
+**Mehdy Bouzid**  
+Étudiant en **Mastère 1 Développement Full Stack (M1)**.
