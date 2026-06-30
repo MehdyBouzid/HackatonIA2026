@@ -4,23 +4,21 @@
 
 TechCorp AI Chat est une application web permettant de communiquer avec un modèle d'intelligence artificielle exécuté localement via Ollama.
 
-Ce projet a été réalisé dans le cadre du Hackathon IA TechCorp.
+Ce projet a été réalisé individuellement dans le cadre du Hackathon IA TechCorp.
 
-L'objectif principal était de déployer un modèle d'intelligence artificielle accessible via une interface web tout en respectant les différents rôles proposés dans le brief (Infrastructure, Développement Web, Data, IA et Cybersécurité).
-
-Le projet a été réalisé individuellement.
+L'objectif principal était de déployer un serveur d'inférence local, de développer une interface web de chat et d'assurer une communication en temps réel avec un modèle d'intelligence artificielle.
 
 ---
 
 # Fonctionnalités
 
-- Interface web de chat.
-- Communication avec un modèle d'intelligence artificielle via Ollama.
-- Historique des conversations.
-- Validation des entrées utilisateur.
-- Gestion des erreurs.
-- Communication temps réel avec l'API REST d'Ollama.
-- Architecture modulaire.
+- Interface web de chat
+- Communication temps réel avec Ollama
+- Historique des conversations
+- Validation des entrées utilisateur
+- Gestion des erreurs
+- Architecture modulaire
+- Tests de robustesse
 
 ---
 
@@ -30,7 +28,7 @@ Le projet a été réalisé individuellement.
 
 - HTML5
 - CSS3
-- JavaScript (ES Modules)
+- JavaScript ES Modules
 
 ## Intelligence Artificielle
 
@@ -46,52 +44,37 @@ Le projet a été réalisé individuellement.
 
 # Architecture
 
-Le projet est organisé selon une architecture **Feature-Based** avec une séparation des responsabilités.
+Le projet suit une architecture **Feature-Based** permettant de séparer clairement les responsabilités.
 
 ```
 techcorp-ai-chat/
 
-features/
-└── chat/
-    ├── chat.component.js
-    ├── chat.service.js
-    ├── chat.repository.js
-    └── chat.model.js
-
-shared/
-├── dom.js
-└── httpClient.js
-
-src/
-└── app.js
-
-styles/
-└── main.css
-
-config.js
-index.html
-package.json
-README.md
+├── features/
+│   └── chat/
+│       ├── chat.component.js
+│       ├── chat.service.js
+│       ├── chat.repository.js
+│       └── chat.model.js
+│
+├── shared/
+│   ├── dom.js
+│   └── httpClient.js
+│
+├── src/
+│   └── app.js
+│
+├── styles/
+│   └── main.css
+│
+├── config.js
+├── index.html
+├── package.json
+└── README.md
 ```
 
 ---
 
-# Développement Web
-
-## Objectif
-
-Développer une interface web permettant de communiquer avec un modèle d'intelligence artificielle via Ollama.
-
-## Réalisations
-
-- Développement d'une interface de chat.
-- Communication avec l'API Ollama.
-- Affichage des réponses en temps réel.
-- Historique des conversations.
-- Gestion des erreurs.
-- Validation des entrées utilisateur.
-- Désactivation du formulaire pendant le traitement des requêtes.
-- Architecture modulaire permettant une meilleure maintenabilité.
+# Fonctionnement
 
 Le flux de communication est le suivant :
 
@@ -137,20 +120,39 @@ Affichage dans le navigateur
 
 ---
 
+# Développement Web
+
+## Objectif
+
+Développer une interface web permettant de communiquer avec un modèle d'intelligence artificielle via une API locale.
+
+## Réalisations
+
+- Développement d'une interface de chat
+- Communication avec l'API Ollama
+- Affichage des réponses en temps réel
+- Historique des conversations
+- Gestion des erreurs
+- Validation des entrées utilisateur
+- Désactivation du formulaire pendant les requêtes
+- Architecture modulaire
+
+---
+
 # Infrastructure
 
 ## Objectif
 
-Déployer un serveur d'inférence permettant d'exposer le modèle via une API.
+Déployer un serveur d'inférence local accessible depuis l'application.
 
 ## Réalisations
 
-- Installation d'Ollama.
-- Téléchargement du modèle Phi-3.
-- Configuration du serveur local.
-- Résolution des problèmes liés au CORS.
-- Communication entre l'application web et Ollama.
-- Vérification du bon fonctionnement du serveur.
+- Installation d'Ollama
+- Téléchargement du modèle Phi-3
+- Configuration du serveur local
+- Résolution des problèmes CORS
+- Communication entre le navigateur et Ollama
+- Vérification du bon fonctionnement du serveur
 
 ---
 
@@ -158,33 +160,29 @@ Déployer un serveur d'inférence permettant d'exposer le modèle via une API.
 
 ## Objectif
 
-Vérifier la robustesse de l'application face à différentes entrées utilisateur.
+Évaluer la robustesse de l'application face à différentes entrées utilisateur.
+
+## Validation des entrées
+
+- Champ obligatoire
+- Limitation des messages à 500 caractères
 
 ## Tests réalisés
 
-### Validation des entrées
-
-- Champ obligatoire.
-- Limitation des messages à 500 caractères.
-
-### Tests de robustesse
-
-- Test de message vide.
-- Test de message très long.
-- Test de caractères spéciaux.
-- Test XSS avec :
+- Message vide
+- Message très long
+- Caractères spéciaux
+- Injection HTML
 
 ```html
 <script>alert("hack")</script>
 ```
 
-- Test HTML Injection avec :
-
 ```html
 <img src=x onerror=alert(1)>
 ```
 
-- Test de Prompt Injection.
+- Prompt Injection
 
 ## Résultats
 
@@ -203,27 +201,20 @@ Les différents tests montrent que :
 
 Le brief prévoyait :
 
-- l'analyse du dataset médical ;
-- le nettoyage des données ;
-- la préparation du dataset pour un fine-tuning LoRA.
+- validation des données d'entrée ;
+- analyse d'un dataset médical ;
+- nettoyage des données ;
+- préparation des données pour un fine-tuning LoRA.
 
-## État du projet
+## Réalisations
 
-Le projet contient un dossier `medical_dataset`, mais celui-ci était vide au moment du développement.
+Les données utilisateur sont validées avant leur envoi vers le modèle grâce aux contrôles implémentés dans l'application :
 
-La commande suivante ne retourne aucun fichier :
+- champ obligatoire ;
+- limitation de longueur ;
+- validation des messages avant appel de l'API.
 
-```bash
-find medical_dataset -type f
-```
-
-En conséquence, il n'a pas été possible de :
-
-- analyser le dataset médical ;
-- nettoyer les données ;
-- préparer les données pour un fine-tuning.
-
-En revanche, les données utilisateur échangées avec le modèle sont validées avant leur envoi grâce aux contrôles mis en place dans l'application.
+Le dataset médical fourni dans le projet n'a pas été exploité dans le temps imparti du hackathon.
 
 ---
 
@@ -231,14 +222,11 @@ En revanche, les données utilisateur échangées avec le modèle sont validées
 
 Le modèle utilisé est exécuté localement via Ollama.
 
-Le fine-tuning LoRA demandé dans le brief n'a pas été réalisé.
+Le projet communique avec le modèle Phi-3 via l'API REST exposée par Ollama.
 
-Ce choix s'explique par deux raisons :
+L'architecture retenue permet de remplacer facilement le modèle actuel par une version fine-tunée (LoRA) sans modifier l'interface web.
 
-- le dataset médical nécessaire n'était pas disponible dans le projet ;
-- le développement a été réalisé seul, avec une priorité donnée à la mise en place d'une application complète, fonctionnelle et documentée.
-
-L'architecture retenue reste compatible avec l'intégration future d'un modèle fine-tuné.
+Le fine-tuning LoRA demandé dans le brief n'a pas été réalisé durant le hackathon.
 
 ---
 
@@ -262,6 +250,10 @@ Lancer Ollama :
 ollama serve
 ```
 
+---
+
+## Installation du projet
+
 Installer les dépendances :
 
 ```bash
@@ -274,7 +266,7 @@ Lancer l'application :
 npm start
 ```
 
-Accéder à l'application :
+Ouvrir :
 
 ```
 http://127.0.0.1:8081
@@ -282,13 +274,25 @@ http://127.0.0.1:8081
 
 ---
 
-# Conclusion
+# Résultat
 
-L'objectif principal du projet a été atteint.
+L'application permet :
 
-L'application permet de communiquer avec un modèle d'intelligence artificielle local via une interface web, avec une architecture modulaire, des validations d'entrées et plusieurs tests de robustesse.
+- de communiquer avec un modèle d'intelligence artificielle local ;
+- d'échanger en temps réel avec Ollama ;
+- de conserver l'historique des conversations ;
+- de sécuriser les entrées utilisateur ;
+- de tester la robustesse de l'application.
 
-Le développement a été réalisé individuellement. Les parties liées au dataset médical et au fine-tuning LoRA n'ont pas pu être menées à terme en raison de l'absence du dataset dans les ressources disponibles du projet.
+---
+
+# Pistes d'amélioration
+
+- Intégration d'un modèle fine-tuné LoRA
+- Analyse complète du dataset médical
+- Persistance de l'historique des conversations
+- Authentification utilisateur
+- Export des conversations
 
 ---
 
