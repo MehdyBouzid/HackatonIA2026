@@ -6,6 +6,8 @@ TechCorp AI Chat est une application web permettant de communiquer avec un modè
 
 Ce projet a été réalisé individuellement dans le cadre du Hackathon IA TechCorp.
 
+Le projet a été développé par un étudiant en **Mastère 1 Développement Full Stack (M1)**.
+
 L'objectif principal était de déployer un serveur d'inférence local, de développer une interface web de chat et d'assurer une communication en temps réel avec un modèle d'intelligence artificielle.
 
 ---
